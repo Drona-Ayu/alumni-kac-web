@@ -1,0 +1,175 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/fraunces';
+@import './styles/theme.css';
+
+@layer base {
+  html {
+    /* Root at 100% so the reader's text-size setting is the source of truth;
+       every dimension below is rem/em so the layout scales with it (§15). */
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--k-canvas);
+    color: var(--k-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--k-leaf-soft);
+    color: var(--k-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--k-focus);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  /* We handle press feedback ourselves, on pointer-down (§1). */
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* §14 — no vestibular motion. Feedback stays; travel and overshoot go. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.15ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* -------------------------------------------------------------------------
+     Typography (§15). Tracking is size-specific — large text tightens, small
+     text opens up. Leading moves inversely to size. Never one value for all.
+  ------------------------------------------------------------------------- */
+  .t-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  .t-h1 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.022em;
+  }
+
+  .t-h2 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.16;
+    letter-spacing: -0.015em;
+  }
+
+  .t-h3 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    line-height: 1.28;
+    letter-spacing: -0.008em;
+  }
+
+  .t-lead {
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    line-height: 1.55;
+    letter-spacing: -0.003em;
+  }
+
+  .t-body {
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: 0;
+  }
+
+  .t-small {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    letter-spacing: 0.005em;
+  }
+
+  /* Eyebrow labels: small type needs positive tracking and extra weight to
+     hold up, especially over translucent surfaces (§12 vibrancy). */
+  .t-label {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  /* -------------------------------------------------------------------------
+     Materials (§12). Chrome floats; content scrolls beneath it.
+  ------------------------------------------------------------------------- */
+  .material-chrome {
+    background-color: var(--k-chrome);
+    backdrop-filter: blur(var(--k-blur-chrome)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--k-blur-chrome)) saturate(180%);
+  }
+
+  /* A bigger surface reads as thicker glass: more blur, deeper shadow, and a
+     bright top edge where light catches the material. */
+  .material-sheet {
+    background-color: var(--k-panel);
+    backdrop-filter: blur(var(--k-blur-panel)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--k-blur-panel)) saturate(180%);
+    box-shadow: var(--shadow-sheet);
+    border-top: 1px solid var(--k-chrome-edge);
+  }
+
+  /* A scroll-edge fade instead of a 1px divider — it exists only where
+     floating chrome actually overlaps content. */
+  .scroll-edge::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    height: 1.5rem;
+    pointer-events: none;
+    background: linear-gradient(to bottom, var(--k-chrome), transparent);
+    opacity: var(--scroll-edge-opacity, 0);
+    transition: opacity 200ms ease-out;
+  }
+
+  .hairline-b {
+    box-shadow: inset 0 -1px 0 var(--k-line);
+  }
+}
+
+@utility prose-measure {
+  max-width: var(--container-prose);
+}

@@ -1,0 +1,176 @@
+/* ---------------------------------------------------------------------------
+   KhAyAL design tokens.
+
+   Two layers on purpose:
+     1. `--k-*` raw values, declared on bare :root and re-declared for dark.
+     2. `@theme inline` maps them to Tailwind's namespaces so `bg-canvas`,
+        `text-ink`, `font-display` etc. exist as utilities.
+
+   Rule: every colour gets its definition on bare :root first. A media query or
+   [data-theme] block only ever *re*-declares. Nothing is defined solely inside
+   a conditional block, so there is no state where a token is missing.
+--------------------------------------------------------------------------- */
+
+:root {
+  /* Surfaces — warm parchment, the colour of aged palm-leaf manuscript */
+  --k-canvas: #fbf8f2;
+  --k-surface: #ffffff;
+  --k-sunken: #f2ede3;
+
+  /* Text */
+  --k-ink: #1c1a16;
+  --k-ink-muted: #5c5548;
+  --k-ink-faint: #8b8375;
+
+  /* Botanical green — the association's primary */
+  --k-leaf: #1e4d3f;
+  --k-leaf-strong: #163a30;
+  --k-leaf-soft: #e4ede8;
+  --k-on-leaf: #f7fbf9;
+
+  /* Brass — accent for dates, numerals, small emphasis */
+  --k-brass: #9a6a24;
+  --k-brass-soft: #f6ecd9;
+
+  --k-line: rgb(28 26 22 / 0.12);
+  --k-line-strong: rgb(28 26 22 / 0.22);
+
+  /* Materials (§12). Chrome floats over content; panels sit on the page. */
+  --k-chrome: rgb(251 248 242 / 0.72);
+  --k-chrome-edge: rgb(255 255 255 / 0.55);
+  --k-panel: rgb(255 255 255 / 0.82);
+  --k-scrim: rgb(20 18 15 / 0.42);
+  --k-blur-chrome: 20px;
+  --k-blur-panel: 30px;
+
+  /* Shadows scale with surface size — a sheet reads thicker than a chip. */
+  --k-shadow-chip: 0 1px 2px rgb(28 26 22 / 0.06), 0 2px 8px rgb(28 26 22 / 0.04);
+  --k-shadow-panel: 0 2px 6px rgb(28 26 22 / 0.06), 0 12px 32px rgb(28 26 22 / 0.1);
+  --k-shadow-sheet: 0 4px 12px rgb(28 26 22 / 0.1), 0 28px 70px rgb(28 26 22 / 0.24);
+
+  --k-focus: #1e4d3f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --k-canvas: #14120f;
+    --k-surface: #1e1a16;
+    --k-sunken: #100e0b;
+
+    --k-ink: #f4efe5;
+    --k-ink-muted: #aaa294;
+    --k-ink-faint: #7d7568;
+
+    --k-leaf: #7cc3a6;
+    --k-leaf-strong: #9ad6bd;
+    --k-leaf-soft: #172c25;
+    --k-on-leaf: #0e1a16;
+
+    --k-brass: #dcb173;
+    --k-brass-soft: #2a2015;
+
+    --k-line: rgb(244 239 229 / 0.14);
+    --k-line-strong: rgb(244 239 229 / 0.26);
+
+    --k-chrome: rgb(20 18 15 / 0.68);
+    --k-chrome-edge: rgb(255 255 255 / 0.1);
+    --k-panel: rgb(30 26 22 / 0.8);
+    --k-scrim: rgb(0 0 0 / 0.58);
+
+    --k-shadow-chip: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 8px rgb(0 0 0 / 0.24);
+    --k-shadow-panel: 0 2px 6px rgb(0 0 0 / 0.34), 0 12px 32px rgb(0 0 0 / 0.44);
+    --k-shadow-sheet: 0 4px 12px rgb(0 0 0 / 0.4), 0 28px 70px rgb(0 0 0 / 0.62);
+
+    --k-focus: #7cc3a6;
+  }
+}
+
+/* Explicit choice wins in both directions. */
+:root[data-theme='dark'] {
+  --k-canvas: #14120f;
+  --k-surface: #1e1a16;
+  --k-sunken: #100e0b;
+
+  --k-ink: #f4efe5;
+  --k-ink-muted: #aaa294;
+  --k-ink-faint: #7d7568;
+
+  --k-leaf: #7cc3a6;
+  --k-leaf-strong: #9ad6bd;
+  --k-leaf-soft: #172c25;
+  --k-on-leaf: #0e1a16;
+
+  --k-brass: #dcb173;
+  --k-brass-soft: #2a2015;
+
+  --k-line: rgb(244 239 229 / 0.14);
+  --k-line-strong: rgb(244 239 229 / 0.26);
+
+  --k-chrome: rgb(20 18 15 / 0.68);
+  --k-chrome-edge: rgb(255 255 255 / 0.1);
+  --k-panel: rgb(30 26 22 / 0.8);
+  --k-scrim: rgb(0 0 0 / 0.58);
+
+  --k-shadow-chip: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 8px rgb(0 0 0 / 0.24);
+  --k-shadow-panel: 0 2px 6px rgb(0 0 0 / 0.34), 0 12px 32px rgb(0 0 0 / 0.44);
+  --k-shadow-sheet: 0 4px 12px rgb(0 0 0 / 0.4), 0 28px 70px rgb(0 0 0 / 0.62);
+
+  --k-focus: #7cc3a6;
+}
+
+/* §14 — translucency is a preference, not a requirement. Frost it solid. */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --k-chrome: var(--k-canvas);
+    --k-panel: var(--k-surface);
+    --k-blur-chrome: 0px;
+    --k-blur-panel: 0px;
+  }
+}
+
+/* §14 — near-solid surfaces with a defined border. */
+@media (prefers-contrast: more) {
+  :root {
+    --k-chrome: var(--k-canvas);
+    --k-panel: var(--k-surface);
+    --k-blur-chrome: 0px;
+    --k-blur-panel: 0px;
+    --k-line: var(--k-ink-muted);
+    --k-line-strong: var(--k-ink);
+    --k-ink-muted: var(--k-ink);
+  }
+}
+
+@theme inline {
+  --color-canvas: var(--k-canvas);
+  --color-surface: var(--k-surface);
+  --color-sunken: var(--k-sunken);
+
+  --color-ink: var(--k-ink);
+  --color-ink-muted: var(--k-ink-muted);
+  --color-ink-faint: var(--k-ink-faint);
+
+  --color-leaf: var(--k-leaf);
+  --color-leaf-strong: var(--k-leaf-strong);
+  --color-leaf-soft: var(--k-leaf-soft);
+  --color-on-leaf: var(--k-on-leaf);
+
+  --color-brass: var(--k-brass);
+  --color-brass-soft: var(--k-brass-soft);
+
+  --color-line: var(--k-line);
+  --color-line-strong: var(--k-line-strong);
+  --color-scrim: var(--k-scrim);
+
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-sans:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans Malayalam',
+    sans-serif;
+
+  --shadow-chip: var(--k-shadow-chip);
+  --shadow-panel: var(--k-shadow-panel);
+  --shadow-sheet: var(--k-shadow-sheet);
+
+  /* Reading measure — long-form copy caps out well before the container does. */
+  --container-prose: 68ch;
+}
