@@ -23,7 +23,15 @@ export function GalleryTile({ image, onOpen, ratio = '4/3' }: Props) {
       )}
       {...pressHandlers}
     >
-      <Img src={image.src} alt={image.alt} ratio={ratio} className="rounded-2xl" />
+      <Img
+        src={image.src}
+        alt={image.alt}
+        ratio={ratio}
+        widths={image.widths}
+        sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 45vw"
+        position={image.position}
+        className="rounded-2xl"
+      />
       {image.caption ? <span className="sr-only">{image.caption}</span> : null}
       <span
         aria-hidden="true"

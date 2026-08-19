@@ -1,4 +1,5 @@
 import type { Album } from './types'
+import { campusPhotos, photoWidths } from './photos'
 
 /**
  * TODO: replace the placeholder graphics in `public/gallery/` with the
@@ -11,6 +12,26 @@ import type { Album } from './types'
  * automatically when the image renders.
  */
 export const albums: Album[] = [
+  /* The association's own photographs — the only real ones on the site so far.
+     Alt text and captions live with the photos in `photos.ts`. */
+  {
+    slug: 'campus-monsoon',
+    title: 'The campus in the monsoon',
+    year: 'Pariyaram',
+    cover: campusPhotos.entrance.src,
+    images: [
+      campusPhotos.entrance,
+      campusPhotos.building,
+      campusPhotos.road,
+      campusPhotos.ground,
+    ].map((photo) => ({
+      src: photo.src,
+      alt: photo.alt,
+      caption: photo.caption,
+      widths: photoWidths,
+      position: photo.position,
+    })),
+  },
   {
     slug: 'alumni-meet-2025',
     title: 'Alumni Meet',
@@ -82,24 +103,6 @@ export const albums: Album[] = [
         src: '/gallery/camp-2025-03.svg',
         alt: 'Placeholder graphic standing in for a photograph from the medical camp.',
         caption: 'Volunteers at the close of the camp.',
-      },
-    ],
-  },
-  {
-    slug: 'campus',
-    title: 'The Campus',
-    year: 'Pariyaram',
-    cover: '/gallery/campus-01.svg',
-    images: [
-      {
-        src: '/gallery/campus-01.svg',
-        alt: 'Placeholder graphic standing in for a photograph of the college campus.',
-        caption: 'Government Ayurveda Medical College, Pariyaram.',
-      },
-      {
-        src: '/gallery/campus-02.svg',
-        alt: 'Placeholder graphic standing in for a photograph of the college campus.',
-        caption: 'The teaching hospital.',
       },
     ],
   },

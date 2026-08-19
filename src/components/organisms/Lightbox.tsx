@@ -4,7 +4,7 @@ import { motion, useMotionValue } from 'motion/react'
 import type { GalleryImage } from '@/content/types'
 import { Icon } from '@/components/atoms/Icon'
 import { IconButton } from '@/components/atoms/IconButton'
-import { asset } from '@/lib/asset'
+import { asset, webpSrcSet } from '@/lib/asset'
 import { useDragAxis } from '@/hooks/useDragAxis'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
@@ -117,14 +117,23 @@ export function Lightbox({ images, index, onIndexChange, onClose }: Props) {
               style={{ width: width || '100%' }}
               aria-hidden={i !== index}
             >
-              <img
-                src={asset(image.src)}
-                alt={image.alt}
-                draggable={false}
-                loading={Math.abs(i - index) <= 1 ? 'eager' : 'lazy'}
-                decoding="async"
-                className="max-h-full max-w-full rounded-xl object-contain select-none"
-              />
+              <picture>
+                {webpSrcSet(image.src, image.widths) ? (
+                  <source
+                    type="image/webp"
+                    srcSet={webpSrcSet(image.src, image.widths)}
+                    sizes="100vw"
+                  />
+                ) : null}
+                <img
+                  src={asset(image.src)}
+                  alt={image.alt}
+                  draggable={false}
+                  loading={Math.abs(i - index) <= 1 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  className="max-h-full max-w-full rounded-xl object-contain select-none"
+                />
+              </picture>
             </div>
           ))}
         </motion.div>
