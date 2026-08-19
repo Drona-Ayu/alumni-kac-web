@@ -48,7 +48,7 @@ export function SiteHeader() {
             footer already carries, and vertical space is scarcer there. */}
         <div className="border-line hidden border-b sm:block">
           <Container width="wide">
-            <div className="flex h-9 items-center justify-between gap-4">
+            <div className="flex h-10 items-center justify-between gap-4">
               <div className="text-ink-muted flex items-center gap-5 text-xs font-medium">
                 <a
                   href={`mailto:${site.contact.email}`}

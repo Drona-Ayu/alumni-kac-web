@@ -25,7 +25,7 @@ export function EventDetail() {
 
   return (
     <>
-      <div className="border-line border-b pt-28 pb-12 sm:pt-40 sm:pb-14">
+      <div className="border-line border-b pt-28 pb-16 sm:pt-40 sm:pb-20 lg:pb-24">
         <Container width="prose">
           {/* Always a way back out (§16 wayfinding). */}
           <Link

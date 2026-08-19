@@ -10,8 +10,12 @@
  * The WebP variants that exist beside every `.jpg` below, as `name-{w}.webp`.
  * The originals are 1022–1086px wide, so the ladder stops at 1024 — a wider
  * rung would be an upscale, costing bytes and adding no detail.
+ *
+ * 640 is there for 3x phones. A gallery tile renders around 185 CSS px, which
+ * at that density asks for ~556px; with no rung between 480 and 800 those
+ * devices took the 800 and the home page shipped 766 KB of imagery.
  */
-export const photoWidths = [480, 800, 1024]
+export const photoWidths = [480, 640, 800, 1024]
 
 export type CampusPhoto = {
   src: string

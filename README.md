@@ -19,7 +19,11 @@ npm run preview    # serve that build locally
 npm run typecheck
 npm run lint
 npm run format
+npm test           # Playwright suite (builds first, then drives a real browser)
 ```
+
+The suite checks layout, colour contrast, image weight and the drag gestures at
+two screen widths. See `CLAUDE.md` for what each spec guards.
 
 Node 22 or newer.
 

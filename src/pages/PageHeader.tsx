@@ -17,7 +17,7 @@ type Props = {
  */
 export function PageHeader({ eyebrow, title, lede, children }: Props) {
   return (
-    <div className="border-line border-b pt-28 pb-14 sm:pt-40 sm:pb-16">
+    <div className="border-line border-b pt-28 pb-16 sm:pt-40 sm:pb-20 lg:pb-24">
       <Container>
         <div className="flex max-w-3xl flex-col gap-4">
           <Text as="p" size="label" tone="brass">
