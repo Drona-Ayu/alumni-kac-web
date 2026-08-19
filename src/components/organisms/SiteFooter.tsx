@@ -11,7 +11,8 @@ export function SiteFooter() {
       <Container width="wide">
         <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr]">
           <div className="flex flex-col gap-4">
-            <Logo variant="lockup" height={2.75} title={`${site.shortName} — ${site.name}`} />
+            {/* The footer has room, so the subtitle lines actually read here. */}
+            <Logo height={5.5} title={`${site.shortName} — ${site.name}`} />
             <Text size="small" tone="muted" className="max-w-sm text-pretty">
               {site.name} — the alumni association of {site.institution}.
             </Text>

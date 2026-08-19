@@ -47,9 +47,14 @@ export function SiteHeader() {
           <div className="flex h-16 items-center justify-between gap-4 md:h-18">
             {/* The link carries the accessible name, so the logo passes
                 title={null} rather than announcing it a second time. */}
-            <Link to="/" className="text-ink no-underline" aria-label={`${site.shortName} — home`}>
-              <Logo variant="mark" height={2.25} title={null} className="sm:hidden" />
-              <Logo variant="lockup" height={2.25} title={null} className="hidden sm:inline-flex" />
+            <Link
+              to="/"
+              className="text-ink flex items-center no-underline"
+              aria-label={`${site.shortName} — home`}
+            >
+              {/* One lockup at every width. The previous version swapped
+                  variants on a breakpoint and painted both below it. */}
+              <Logo height={2.75} title={null} />
             </Link>
 
             <nav aria-label="Primary" className="hidden md:block">

@@ -58,18 +58,27 @@ The parts that matter most in practice:
 
 ## The logo
 
-`src/components/atoms/Logo.tsx` renders it, in two variants: `mark` (the
-roundel) and `lockup` (roundel + "hAyAL"). It is **inline SVG, not an `<img>`** —
-the wordmark is filled with `currentColor` so it follows the theme, and
-`currentColor` cannot cross an `<img>` boundary. The roundel keeps its true
-brand colours in every theme.
+`src/components/atoms/Logo.tsx` renders it, in two variants: `lockup` (the
+supplied artwork entire — roundel, overlapping `h`, wordmark and both subtitle
+lines) and `mark` (the roundel alone). **Use the lockup as drawn.** The overlap
+between the `h` and the roundel is what makes it read as this association's
+logo; pulling the parts into a tidier arrangement loses that.
+
+It is **inline SVG, not an `<img>`** — the wordmark and subtitle are filled with
+`currentColor` so they follow the theme, and `currentColor` cannot cross an
+`<img>` boundary. The roundel keeps its true brand colours in every theme.
 
 The two figures are the K: mark + wordmark reads _KhAyAL_.
 
-Chrome composes the mark and the wordmark at its own proportions rather than
-scaling the supplied lockup, which is badge-shaped and would put the wordmark at
-about 9px in a header. Paths live in the generated `logoPaths.ts` — regenerate
-from `brand/logo-master.png`, never hand-edit.
+Paths live in the generated `logoPaths.ts`, all in one coordinate space —
+regenerate from `brand/logo-master.png`, never hand-edit.
+
+`Logo` deliberately sets **no display utility** on its `<svg>`; callers own
+layout. An earlier version hardcoded `inline-flex`, and a caller's `hidden`
+could not override it — Tailwind orders utilities by property, not by the order
+they are written — so below `sm` the header painted two logos at once. The
+`data-logo` attribute exists so tests can find the logo without a selector that
+also matches every icon in the chrome.
 
 ## Component structure
 
