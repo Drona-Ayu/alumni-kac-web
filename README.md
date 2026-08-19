@@ -71,6 +71,18 @@ page all read from that one array.
 Alt text is written in the content file, not the component, because it is
 content — it is the caption for a reader who cannot see the image.
 
+### Changing the logo
+
+The master artwork is `brand/logo-master.png`, kept outside `public/` so it is
+archived but never shipped. Every logo asset the site uses — the SVGs in
+`public/brand/`, the favicon, the raster icons, the social card, and the paths
+the inline `<Logo>` component draws — is derived from it. See `brand/README.md`
+before replacing it; do not hand-edit the derived files.
+
+The brand colours appear **only inside the logo**. The site's own teal and
+orange are darkened versions, because the brand values are not legible as text —
+there is a note explaining this in `src/styles/theme.css`.
+
 ### Adding a committee member
 
 Add to `officeBearers` or `executiveMembers` in `src/content/committee.ts`. A

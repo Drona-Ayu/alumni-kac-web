@@ -56,6 +56,21 @@ The parts that matter most in practice:
   `prefers-reduced-motion`, `prefers-reduced-transparency`, `prefers-contrast`.
   Reduced motion means a cross-fade, not the absence of feedback.
 
+## The logo
+
+`src/components/atoms/Logo.tsx` renders it, in two variants: `mark` (the
+roundel) and `lockup` (roundel + "hAyAL"). It is **inline SVG, not an `<img>`** —
+the wordmark is filled with `currentColor` so it follows the theme, and
+`currentColor` cannot cross an `<img>` boundary. The roundel keeps its true
+brand colours in every theme.
+
+The two figures are the K: mark + wordmark reads _KhAyAL_.
+
+Chrome composes the mark and the wordmark at its own proportions rather than
+scaling the supplied lockup, which is badge-shaped and would put the wordmark at
+about 9px in a header. Paths live in the generated `logoPaths.ts` — regenerate
+from `brand/logo-master.png`, never hand-edit.
+
 ## Component structure
 
 Atoms → molecules → organisms, and the boundary that keeps the site

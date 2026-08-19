@@ -19,7 +19,6 @@ export type IconName =
   | 'moon'
   | 'auto'
   | 'check'
-  | 'lotus'
 
 /**
  * Stroke icons on a 24-unit grid, `currentColor` throughout, so an icon
@@ -46,8 +45,6 @@ const PATHS: Record<IconName, string> = {
   moon: 'M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z',
   auto: 'M12 3a9 9 0 100 18zM12 3a9 9 0 010 18',
   check: 'M5 13l4 4L19 7',
-  lotus:
-    'M12 21c-4.5 0-8-2.8-8-6 0 0 3-1 5 1 0-4 1.6-7 3-9 1.4 2 3 5 3 9 2-2 5-1 5-1 0 3.2-3.5 6-8 6z',
 }
 
 type Props = {
