@@ -1,26 +1,14 @@
 import { useId } from 'react'
 
 import { cn } from '@/lib/cn'
-import { figurePath, geometry, quadrants, wordmarkPath } from './logoPaths'
+import { figurePath, geometry, quadrants, subtitlePath, wordmarkPath } from './logoPaths'
 
-const { markSize, circle, wordmarkBox } = geometry
-
-/**
- * How tall the wordmark stands relative to the roundel in the chrome lockup.
- *
- * The supplied artwork is a badge: a large roundel beside comparatively small
- * type, which is right on a letterhead and wrong in a 64px header — the
- * wordmark would land at about 9px and read as a smudge. Chrome therefore
- * composes the two parts at its own proportions, the way brands ship a
- * separate horizontal lockup for navigation. 0.58 puts the cap height at
- * roughly 15px against a 36px roundel.
- */
-const WORDMARK_SCALE = 0.58
+const { markSize, lockupWidth, lockupHeight, circle } = geometry
 
 type Props = {
-  /** `mark` is the roundel alone; `lockup` sets the wordmark beside it. */
-  variant?: 'mark' | 'lockup'
-  /** Roundel height in rem, so the logo scales with the reader's text size. */
+  /** `lockup` is the supplied artwork entire; `mark` is the roundel alone. */
+  variant?: 'lockup' | 'mark'
+  /** Height in rem, so the logo scales with the reader's text-size setting. */
   height?: number
   /**
    * Accessible name. Pass `null` inside an already-labelled link, otherwise
@@ -30,22 +18,50 @@ type Props = {
   className?: string
 }
 
-/** The roundel: four exact quadrants with the figures clipped to the circle. */
-function Mark({ height, label }: { height: number; label?: string }) {
+/**
+ * The association's logo, drawn exactly as supplied.
+ *
+ * All the paths live in one coordinate space, so the lockup is a single `<svg>`
+ * and the artwork's composition falls out of it for free — including the way
+ * the `h` overlaps the roundel, which is the detail that makes it read as this
+ * association's logo rather than a mark sitting next to some type.
+ *
+ * It is inlined rather than fetched through an `<img>` because the wordmark and
+ * subtitle are filled with `currentColor`, and `currentColor` cannot cross an
+ * `<img>` boundary. That is what lets the type flip to cream in dark mode while
+ * the roundel keeps its true brand colours — a logo that restyles itself stops
+ * being the logo.
+ *
+ * The two figures are the K: mark plus wordmark reads "KhAyAL".
+ *
+ * Note there is deliberately no display utility on the `<svg>`. An earlier
+ * version hardcoded one, and a caller's `hidden` could not override it —
+ * Tailwind orders utilities by property, not by the order they are written — so
+ * the header painted the mark and the lockup at once. Callers own layout.
+ */
+export function Logo({ variant = 'lockup', height = 2.75, title = 'KhAyAL', className }: Props) {
   // The logo appears more than once per page, and two elements sharing a DOM
   // id is invalid — so the clip gets a unique one.
   const clipId = useId()
+  const isMark = variant === 'mark'
+  const width = isMark ? markSize : lockupWidth
+  const boxHeight = isMark ? markSize : lockupHeight
+
   return (
     <svg
-      viewBox={`0 0 ${markSize} ${markSize}`}
+      viewBox={`0 0 ${width} ${boxHeight}`}
       height={`${height}rem`}
-      width={`${height}rem`}
-      role={label ? 'img' : 'presentation'}
-      aria-label={label}
-      aria-hidden={label ? undefined : true}
+      width={`${height * (width / boxHeight)}rem`}
+      role={title ? 'img' : 'presentation'}
+      aria-label={title ?? undefined}
+      aria-hidden={title ? undefined : true}
       focusable="false"
-      className="block shrink-0"
+      // Lets tests and anyone else find the logo unambiguously, rather than
+      // guessing at an svg selector that also matches every icon in the chrome.
+      data-logo={variant}
+      className={cn('shrink-0', className)}
     >
+      {/* The figures were clipped to the circle in the original artwork. */}
       <clipPath id={clipId}>
         <circle cx={circle.cx} cy={circle.cy} r={circle.r} />
       </clipPath>
@@ -53,48 +69,17 @@ function Mark({ height, label }: { height: number; label?: string }) {
         {quadrants.map((q) => (
           <path key={q.fill} fill={q.fill} d={q.d} />
         ))}
-        {/* The two figures together form the K: mark + wordmark reads KhAyAL. */}
         <path fill="#000" fillRule="evenodd" d={figurePath} />
       </g>
+
+      {!isMark && (
+        <>
+          <path fill="currentColor" fillRule="evenodd" d={wordmarkPath} />
+          {/* A shade lighter than the wordmark in the original; opacity carries
+              that relationship into whatever colour currentColor resolves to. */}
+          <path fill="currentColor" fillOpacity={0.78} fillRule="evenodd" d={subtitlePath} />
+        </>
+      )}
     </svg>
-  )
-}
-
-/**
- * The association's logo, inlined rather than fetched through an `<img>`.
- *
- * Inlining is what makes the wordmark theme-aware: it is filled with
- * `currentColor`, which cannot cross an `<img>` boundary. The roundel keeps its
- * true brand colours in every theme — a logo that restyles itself stops being
- * the logo — while the type follows the surrounding text colour, so the lockup
- * stays legible on parchment and on near-black alike.
- */
-export function Logo({ variant = 'lockup', height = 2.25, title = 'KhAyAL', className }: Props) {
-  if (variant === 'mark') {
-    return (
-      <span className={cn('inline-flex', className)}>
-        <Mark height={height} label={title ?? undefined} />
-      </span>
-    )
-  }
-
-  return (
-    <span
-      className={cn('inline-flex items-center gap-2.5', className)}
-      role={title ? 'img' : undefined}
-      aria-label={title ?? undefined}
-    >
-      <Mark height={height} />
-      <svg
-        viewBox={`${wordmarkBox.x} ${wordmarkBox.y} ${wordmarkBox.w} ${wordmarkBox.h}`}
-        height={`${height * WORDMARK_SCALE}rem`}
-        width={`${height * WORDMARK_SCALE * (wordmarkBox.w / wordmarkBox.h)}rem`}
-        aria-hidden="true"
-        focusable="false"
-        className="block shrink-0"
-      >
-        <path fill="currentColor" fillRule="evenodd" d={wordmarkPath} />
-      </svg>
-    </span>
   )
 }
