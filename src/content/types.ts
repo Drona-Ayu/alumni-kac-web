@@ -119,6 +119,13 @@ export type GalleryImage = {
   /** Real alt text, written for someone who cannot see the photo. */
   alt: string
   caption?: string
+  /**
+   * Widths of the WebP variants sitting beside `src`. Present on the real
+   * photographs; absent on the generated placeholders, which are SVG.
+   */
+  widths?: number[]
+  /** object-position for the crop, when the subject is off-centre. */
+  position?: string
 }
 
 export type Album = {
@@ -146,4 +153,30 @@ export type MembershipContent = {
   steps: { title: string; body: string }[]
   formUrl?: string
   bankDetails?: { label: string; value: string }[]
+}
+
+export type QuickLink = {
+  to: string
+  label: string
+  /** One short line saying what is actually behind the link. */
+  description: string
+  /** Narrow union rather than the component's IconName, so this module stays
+      a leaf — content does not depend on the component layer. */
+  icon: 'people' | 'calendar' | 'images' | 'card' | 'mail'
+}
+
+export type HomeContent = {
+  /** Key into `campusPhotos` — the photograph the hero is built on. */
+  heroPhoto: 'entrance' | 'building' | 'road' | 'ground'
+  quickLinks: QuickLink[]
+}
+
+export type Story = {
+  name: string
+  batch: string
+  role: string
+  place?: string
+  /** A short first-person quote. Two or three sentences at most. */
+  quote: string
+  photo?: string
 }
