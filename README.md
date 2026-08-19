@@ -64,9 +64,14 @@ page all read from that one array.
 
 ### Adding photographs
 
-1. Put the image files in `public/gallery/`.
-2. Add them to an album in `src/content/gallery.ts`, with real `alt` text
-   describing what is in each picture.
+Real photographs of the college live in `brand/photos/` as masters and are
+resized into `public/campus/` by the photo script — WebP at 480/800/1024 plus a
+JPEG fallback. Add the master, re-run the script, then describe the photo in
+`src/content/photos.ts`; the gallery and the home page both read from there.
+
+Placeholder gallery artwork still lives in `public/gallery/` and is referenced
+directly from `src/content/gallery.ts`. Replace those albums with real
+photographs the same way.
 
 Alt text is written in the content file, not the component, because it is
 content — it is the caption for a reader who cannot see the image.

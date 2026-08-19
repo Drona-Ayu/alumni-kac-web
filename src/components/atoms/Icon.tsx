@@ -19,6 +19,10 @@ export type IconName =
   | 'moon'
   | 'auto'
   | 'check'
+  | 'people'
+  | 'images'
+  | 'card'
+  | 'quote'
 
 /**
  * Stroke icons on a 24-unit grid, `currentColor` throughout, so an icon
@@ -45,6 +49,13 @@ const PATHS: Record<IconName, string> = {
   moon: 'M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z',
   auto: 'M12 3a9 9 0 100 18zM12 3a9 9 0 010 18',
   check: 'M5 13l4 4L19 7',
+  people:
+    'M9 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7z M2.5 20a6.5 6.5 0 0113 0 M16 4.5a3.5 3.5 0 010 7 M17.5 14.2a6.5 6.5 0 014 5.8',
+  images:
+    'M8 3h13a1 1 0 011 1v11a1 1 0 01-1 1H8a1 1 0 01-1-1V4a1 1 0 011-1z M7 20H4a1 1 0 01-1-1V8 M11 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3 M7 13l3.5-3 4 4 2-1.5L22 16',
+  card: 'M3 6h18a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V7a1 1 0 011-1z M2 10h20 M6 14h4',
+  quote:
+    'M9 7c-2.8 0-5 2.2-5 5s2.2 4 4.5 4c.3 0 .5 0 .5.5 0 1.5-1 3-2.5 3.5 M20 7c-2.8 0-5 2.2-5 5s2.2 4 4.5 4c.3 0 .5 0 .5.5 0 1.5-1 3-2.5 3.5',
 }
 
 type Props = {

@@ -43,6 +43,47 @@ export function SiteHeader() {
         )}
         style={{ '--scroll-edge-opacity': scrolled ? 1 : 0 } as React.CSSProperties}
       >
+        {/* Utility strip: contact details and socials, above the nav proper.
+            Hidden on phones — it is a second row of chrome for information the
+            footer already carries, and vertical space is scarcer there. */}
+        <div className="border-line hidden border-b sm:block">
+          <Container width="wide">
+            <div className="flex h-9 items-center justify-between gap-4">
+              <div className="text-ink-muted flex items-center gap-5 text-xs font-medium">
+                <a
+                  href={`mailto:${site.contact.email}`}
+                  className="hover:text-leaf inline-flex items-center gap-1.5 no-underline"
+                >
+                  <Icon name="mail" size={0.9} />
+                  {site.contact.email}
+                </a>
+                <a
+                  href={`tel:${site.contact.phone.replace(/\s/g, '')}`}
+                  className="hover:text-leaf inline-flex items-center gap-1.5 no-underline"
+                >
+                  <Icon name="phone" size={0.9} />
+                  {site.contact.phone}
+                </a>
+              </div>
+              <ul className="flex items-center gap-1">
+                {site.socials.map((social) => (
+                  <li key={social.href + social.label}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label={social.label}
+                      className="text-ink-muted hover:text-leaf inline-flex h-7 w-7 items-center justify-center rounded-full"
+                    >
+                      <Icon name={social.icon} size={0.95} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Container>
+        </div>
+
         <Container width="wide">
           <div className="flex h-16 items-center justify-between gap-4 md:h-18">
             {/* The link carries the accessible name, so the logo passes

@@ -80,6 +80,25 @@ they are written — so below `sm` the header painted two logos at once. The
 `data-logo` attribute exists so tests can find the logo without a selector that
 also matches every icon in the chrome.
 
+## Photographs
+
+Masters in `brand/photos/` (never served), derivatives in `public/campus/`:
+WebP at 480/800/1024 plus a JPEG fallback. The ladder stops at 1024 because the
+originals are 1022–1086px wide — a wider rung would be an upscale.
+
+`Img` renders a `<picture>` when given `widths`, because a srcSet of WebP alone
+strands a browser that understands srcSet but not WebP. Always pass `sizes`;
+without it the browser assumes `100vw` and over-fetches on every phone.
+
+`src/content/photos.ts` is the single source of truth for the real photographs —
+path, alt text, caption and focal point. The gallery and the hero both read it.
+
+**Contrast over a photograph cannot be checked from the tokens.** The hero's
+white type is verified by screenshotting it, sampling the brightest patch of the
+rendered backdrop, and computing the ratio. That check is what caught the
+registration chip sitting at 3.3:1 on a light-tinted background; darkening the
+chip's own backing is what fixed it.
+
 ## Component structure
 
 Atoms → molecules → organisms, and the boundary that keeps the site
