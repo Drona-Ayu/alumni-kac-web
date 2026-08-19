@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { site } from '@/content/site'
 import { Container } from '@/components/atoms/Container'
-import { Icon } from '@/components/atoms/Icon'
+import { Logo } from '@/components/atoms/Logo'
 import { Text } from '@/components/atoms/Text'
 import { SocialLinks } from '@/components/molecules/SocialLinks'
 
@@ -11,14 +11,7 @@ export function SiteFooter() {
       <Container width="wide">
         <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr]">
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2.5">
-              <span className="bg-leaf text-on-leaf flex h-9 w-9 items-center justify-center rounded-full">
-                <Icon name="lotus" size={1.2} />
-              </span>
-              <span className="font-display text-lg font-semibold tracking-[-0.02em]">
-                {site.shortName}
-              </span>
-            </div>
+            <Logo variant="lockup" height={2.75} title={`${site.shortName} — ${site.name}`} />
             <Text size="small" tone="muted" className="max-w-sm text-pretty">
               {site.name} — the alumni association of {site.institution}.
             </Text>

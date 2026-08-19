@@ -22,15 +22,19 @@
   --k-ink-muted: #5c5548;
   --k-ink-faint: #8b8375;
 
-  /* Botanical green — the association's primary */
-  --k-leaf: #1e4d3f;
-  --k-leaf-strong: #163a30;
-  --k-leaf-soft: #e4ede8;
-  --k-on-leaf: #f7fbf9;
+  /* Teal, from the logo's lower-left quadrant. NOTE: the logo's true brand
+     teal is #0EA99A and orange is #F47720, but at 2.77:1 and 2.64:1 on the
+     canvas neither is legible as text. The brand hexes therefore live only
+     inside the logo SVGs; these tokens are the darkened, AA-passing UI
+     equivalents. Do not "correct" them back to the brand values. */
+  --k-leaf: #0a6f66;
+  --k-leaf-strong: #075c54;
+  --k-leaf-soft: #dff1ee;
+  --k-on-leaf: #f2fbf9;
 
-  /* Brass — accent for dates, numerals, small emphasis */
-  --k-brass: #9a6a24;
-  --k-brass-soft: #f6ecd9;
+  /* Orange, from the logo's lower-right quadrant — dates, numerals, eyebrows */
+  --k-brass: #a85410;
+  --k-brass-soft: #fceee2;
 
   --k-line: rgb(28 26 22 / 0.12);
   --k-line-strong: rgb(28 26 22 / 0.22);
@@ -48,7 +52,7 @@
   --k-shadow-panel: 0 2px 6px rgb(28 26 22 / 0.06), 0 12px 32px rgb(28 26 22 / 0.1);
   --k-shadow-sheet: 0 4px 12px rgb(28 26 22 / 0.1), 0 28px 70px rgb(28 26 22 / 0.24);
 
-  --k-focus: #1e4d3f;
+  --k-focus: #0a6f66;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -61,13 +65,13 @@
     --k-ink-muted: #aaa294;
     --k-ink-faint: #7d7568;
 
-    --k-leaf: #7cc3a6;
-    --k-leaf-strong: #9ad6bd;
-    --k-leaf-soft: #172c25;
-    --k-on-leaf: #0e1a16;
+    --k-leaf: #35c9b8;
+    --k-leaf-strong: #5fdccb;
+    --k-leaf-soft: #10302c;
+    --k-on-leaf: #04211e;
 
-    --k-brass: #dcb173;
-    --k-brass-soft: #2a2015;
+    --k-brass: #f9a05c;
+    --k-brass-soft: #2c1d10;
 
     --k-line: rgb(244 239 229 / 0.14);
     --k-line-strong: rgb(244 239 229 / 0.26);
@@ -81,7 +85,7 @@
     --k-shadow-panel: 0 2px 6px rgb(0 0 0 / 0.34), 0 12px 32px rgb(0 0 0 / 0.44);
     --k-shadow-sheet: 0 4px 12px rgb(0 0 0 / 0.4), 0 28px 70px rgb(0 0 0 / 0.62);
 
-    --k-focus: #7cc3a6;
+    --k-focus: #35c9b8;
   }
 }
 
@@ -95,13 +99,13 @@
   --k-ink-muted: #aaa294;
   --k-ink-faint: #7d7568;
 
-  --k-leaf: #7cc3a6;
-  --k-leaf-strong: #9ad6bd;
-  --k-leaf-soft: #172c25;
-  --k-on-leaf: #0e1a16;
+  --k-leaf: #35c9b8;
+  --k-leaf-strong: #5fdccb;
+  --k-leaf-soft: #10302c;
+  --k-on-leaf: #04211e;
 
-  --k-brass: #dcb173;
-  --k-brass-soft: #2a2015;
+  --k-brass: #f9a05c;
+  --k-brass-soft: #2c1d10;
 
   --k-line: rgb(244 239 229 / 0.14);
   --k-line-strong: rgb(244 239 229 / 0.26);
@@ -115,7 +119,7 @@
   --k-shadow-panel: 0 2px 6px rgb(0 0 0 / 0.34), 0 12px 32px rgb(0 0 0 / 0.44);
   --k-shadow-sheet: 0 4px 12px rgb(0 0 0 / 0.4), 0 28px 70px rgb(0 0 0 / 0.62);
 
-  --k-focus: #7cc3a6;
+  --k-focus: #35c9b8;
 }
 
 /* §14 — translucency is a preference, not a requirement. Frost it solid. */

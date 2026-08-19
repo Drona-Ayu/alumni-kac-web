@@ -5,6 +5,7 @@ import { Button } from '@/components/atoms/Button'
 import { Heading } from '@/components/atoms/Heading'
 import { Text } from '@/components/atoms/Text'
 import { Icon } from '@/components/atoms/Icon'
+import { Logo } from '@/components/atoms/Logo'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { springs, crossFade } from '@/lib/motion'
 import { asset } from '@/lib/asset'
@@ -22,22 +23,27 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24">
-      {/* A still backdrop, not a moving one: a full-viewport animated field is
-          exactly what §14 asks us not to build. */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+      {/* The roundel itself, oversized and bled off the right edge. A still
+          backdrop, not a moving one: a full-viewport animated field is exactly
+          what §14 asks us not to build. overflow-hidden keeps the bleed from
+          widening the page. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
         <img
-          src={asset('/hero.svg')}
+          src={asset('/brand/logo-mark.svg')}
           alt=""
-          className="h-full w-full object-cover opacity-[0.14] dark:opacity-[0.22]"
+          className="absolute -top-[30%] -right-[22%] h-[175%] w-auto opacity-[0.18] blur-[100px] dark:opacity-25"
         />
-        <div className="from-canvas via-canvas/70 to-canvas absolute inset-0 bg-gradient-to-b" />
+        <div className="from-canvas/0 via-canvas/50 to-canvas absolute inset-0 bg-gradient-to-b" />
       </div>
 
       <Container>
         <div className="flex max-w-3xl flex-col gap-6">
           <motion.div {...enter(0)}>
             <span className="border-line bg-surface/70 text-ink-muted inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold tracking-[0.04em] backdrop-blur-sm">
-              <Icon name="lotus" size={0.95} className="text-leaf" />
+              <Logo variant="mark" height={1.05} title={null} />
               Reg. No. {site.registrationNumber}
             </span>
           </motion.div>

@@ -3,6 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { site } from '@/content/site'
 import { Icon } from '@/components/atoms/Icon'
+import { Logo } from '@/components/atoms/Logo'
 import { IconButton } from '@/components/atoms/IconButton'
 import { Container } from '@/components/atoms/Container'
 import { ThemeToggle } from '@/components/molecules/ThemeToggle'
@@ -44,22 +45,11 @@ export function SiteHeader() {
       >
         <Container width="wide">
           <div className="flex h-16 items-center justify-between gap-4 md:h-18">
-            <Link
-              to="/"
-              className="text-ink flex items-center gap-2.5 no-underline"
-              aria-label={`${site.shortName} — home`}
-            >
-              <span className="bg-leaf text-on-leaf flex h-9 w-9 items-center justify-center rounded-full">
-                <Icon name="lotus" size={1.2} />
-              </span>
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-lg font-semibold tracking-[-0.02em]">
-                  {site.shortName}
-                </span>
-                <span className="text-ink-faint mt-0.5 hidden text-[0.6875rem] font-medium tracking-[0.04em] sm:block">
-                  Alumni Association
-                </span>
-              </span>
+            {/* The link carries the accessible name, so the logo passes
+                title={null} rather than announcing it a second time. */}
+            <Link to="/" className="text-ink no-underline" aria-label={`${site.shortName} — home`}>
+              <Logo variant="mark" height={2.25} title={null} className="sm:hidden" />
+              <Logo variant="lockup" height={2.25} title={null} className="hidden sm:inline-flex" />
             </Link>
 
             <nav aria-label="Primary" className="hidden md:block">
