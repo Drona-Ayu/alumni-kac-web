@@ -7,9 +7,9 @@ import { SocialLinks } from '@/components/molecules/SocialLinks'
 
 export function SiteFooter() {
   return (
-    <footer className="bg-sunken border-line mt-24 border-t">
+    <footer className="bg-sunken mt-24">
       <Container width="wide">
-        <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr]">
+        <div className="grid gap-10 pt-14 pb-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr]">
           <div className="flex flex-col gap-4">
             {/* The footer has room, so the subtitle lines actually read here. */}
             <Logo height={5.5} title={`${site.shortName} — ${site.name}`} />
@@ -70,7 +70,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="border-line flex flex-col gap-2 border-t py-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="border-line flex flex-col gap-2 border-t py-8 sm:flex-row sm:items-center sm:justify-between">
           <Text size="small" tone="faint">
             © {new Date().getFullYear()} {site.name}. Registered {site.established}.
           </Text>

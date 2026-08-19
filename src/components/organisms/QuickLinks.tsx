@@ -42,7 +42,10 @@ function Tile({ link }: { link: QuickLink }) {
  */
 export function QuickLinks() {
   return (
-    <div className="relative z-10 -mt-10 sm:-mt-14">
+    /* Pulled up over the hero, but with its own room underneath: the tiles
+       used to end exactly where the next section began, which only became
+       visible once that section gained a background of its own. */
+    <div className="relative z-10 -mt-10 pb-16 sm:-mt-14 sm:pb-20 lg:pb-24">
       <Container>
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
           {home.quickLinks.map((link) => (
