@@ -120,6 +120,29 @@ modules are the data. A missing or misspelled field fails `npm run typecheck`.
 Placeholder data is marked `TODO:` — see the "Before publishing" list in
 `README.md` for what still needs real values.
 
+## Tests
+
+`npm test` runs the Playwright suite in `tests/`, at two widths (1440 desktop,
+Pixel 7 mobile). It runs against the **production build**, not the dev server —
+the utility-class ordering bug that once painted two logos in the header only
+exists in the bundled CSS.
+
+| Spec               | Guards                                                                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `pages.spec.ts`    | No horizontal overflow, one `h1`, one `[data-logo]` in the header, no console errors, scroll restoration                                                     |
+| `contrast.spec.ts` | Every token pair clears WCAG AA in both themes                                                                                                               |
+| `hero.spec.ts`     | White hero type against the _brightest pixel_ of the photograph behind it; home-page image weight and that `srcSet` resolves to a variant                    |
+| `gestures.spec.ts` | Sheet tracks 1:1, springs back without momentum, dismisses on a throw, can be caught mid-close; press feedback on pointer-down; reduced motion still reveals |
+
+Every one of these corresponds to a bug that actually shipped. **A failing
+interaction check means the interaction regressed until proven otherwise** — do
+not reach for the retry. `retries: 1` in CI absorbs a slow runner; a genuine
+break fails both attempts.
+
+When a gesture test needs a threshold, derive it from the element's measured
+geometry rather than a magic pixel count, so a slow CI runner does not turn
+correct behaviour into a red build.
+
 ## Commands
 
 ```
@@ -129,4 +152,5 @@ npm run preview    # serve the production build
 npm run typecheck
 npm run lint
 npm run format
+npm test            # Playwright suite against the production build
 ```
