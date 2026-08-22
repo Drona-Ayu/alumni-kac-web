@@ -34,12 +34,19 @@ export const site: SiteContent = {
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Government+Ayurveda+College+Pariyaram',
   },
 
-  // TODO: replace with the association's real handles, or delete the entries.
-  socials: [
-    { label: 'Facebook', href: 'https://facebook.com/', icon: 'facebook' },
-    { label: 'Instagram', href: 'https://instagram.com/', icon: 'instagram' },
-    { label: 'YouTube', href: 'https://youtube.com/', icon: 'youtube' },
-  ],
+  /*
+   * The link is the bare profile on purpose: the supplied URL carried
+   * `utm_source=qr`, `igsh` and `igsi` scan-attribution tokens copied off a
+   * printed card. Those are per-share and go stale — a site link should not
+   * carry them.
+   *
+   * TODO: Facebook and YouTube are omitted until the association has real
+   * handles; pointing an icon at a service's homepage is worse than no icon.
+   * Re-add in this shape:
+   *   { label: 'Facebook', href: '…', icon: 'facebook' },
+   *   { label: 'YouTube', href: '…', icon: 'youtube' },
+   */
+  socials: [{ label: 'Instagram', href: 'https://www.instagram.com/kh_ay_al_', icon: 'instagram' }],
 
   /* Named for what they contain, not for safe umbrellas (§16). */
   nav: [

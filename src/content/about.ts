@@ -69,9 +69,10 @@ export const about: AboutContent = {
   ],
 
   stats: [
-    // TODO: replace with real figures before publishing — these are placeholders.
-    { value: '900+', label: 'Graduates on the register' },
-    { value: '25', label: 'Batches represented' },
+    { value: '2000+', label: 'Graduates on the register' },
+    { value: '30', label: 'Batches represented' },
+    // TODO: the only figure here still a placeholder — replace with the count
+    // the association has actually held.
     { value: '12', label: 'Programmes held' },
     { value: '2024', label: 'Year registered' },
   ],
