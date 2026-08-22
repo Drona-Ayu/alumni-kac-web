@@ -108,16 +108,22 @@ grep -rn "TODO" src/content
 
 What needs real values:
 
-- [ ] `site.ts` — email, phone, postal address, map link, social media handles
+- [x] `site.ts` — the Instagram handle
+- [ ] `site.ts` — email, phone, postal address, map link, Facebook and YouTube
+      handles (both entries are removed rather than pointing at a homepage —
+      the shape to re-add them in is in the file)
 - [ ] `site.ts` — how the association explains the name _KhAyAL_
-- [ ] `about.ts` — history, mission and vision wording, timeline, the four figures
+- [x] `about.ts` — graduates on the register, batches represented
+- [ ] `about.ts` — history, mission and vision wording, timeline, and the
+      programmes-held figure
 - [ ] `committee.ts` — every name, role, batch and photograph
 - [ ] `events.ts` — the actual programme; delete the sample entries
 - [ ] `notices.ts` — real announcements
 - [ ] `gallery.ts` — real photographs and their alt text (replace the placeholder
       graphics in `public/gallery/`)
-- [ ] `membership.ts` — fees approved by the general body, bank account details,
-      and `formUrl` for the membership form
+- [x] `membership.ts` — the fees and who may hold associate membership
+- [ ] `membership.ts` — bank account details and `formUrl` for the membership
+      form
 
 ## Deploying
 

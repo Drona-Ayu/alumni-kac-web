@@ -1,8 +1,8 @@
 import type { MembershipContent } from './types'
 
 /**
- * TODO: replace the fees, bank details and form link with the association's
- * own. `formUrl` is expected to be a Google Form (or similar) — leaving it
+ * TODO: replace the bank details and form link with the association's own.
+ * `formUrl` is expected to be a Google Form (or similar) — leaving it
  * undefined hides the button rather than rendering a dead link.
  */
 export const membership: MembershipContent = {
@@ -12,7 +12,7 @@ export const membership: MembershipContent = {
   eligibility: [
     'Any graduate of Government Ayurveda Medical College, Pariyaram, of any batch.',
     'Post-graduates and research scholars of the college.',
-    'House surgeons and final-year students may enrol as associate members.',
+    'Final-year students of the college may enrol as associate members.',
   ],
 
   benefits: [
@@ -35,21 +35,20 @@ export const membership: MembershipContent = {
   ],
 
   tiers: [
-    // TODO: replace with the fees approved by the general body.
     {
-      name: 'Annual membership',
+      name: 'Working fund',
       fee: '₹500 / year',
       note: 'Renewed each year before the general body meeting.',
     },
     {
       name: 'Life membership',
-      fee: '₹5,000 once',
+      fee: '₹2,000 once',
       note: 'No renewal, ever. The simplest option for most members.',
     },
     {
       name: 'Associate (students)',
       fee: 'Free',
-      note: 'For house surgeons and final-year students of the college.',
+      note: 'For final-year students of the college.',
     },
   ],
 
